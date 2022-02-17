@@ -1,38 +1,43 @@
-package mx.edu.utez.marketplace.category.model;
+package mx.edu.utez.marketplace.subcategory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import mx.edu.utez.marketplace.category.model.Category;
+import mx.edu.utez.marketplace.product.model.Product;
 import mx.edu.utez.marketplace.status.model.Status;
-import mx.edu.utez.marketplace.subcategory.model.Subcategory;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Category {
+public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "description",unique = true)
-    private String description;
+    String description;
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
-    @OneToMany(mappedBy = "category")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    @OneToMany(mappedBy = "subcategory")
     @JsonIgnore
-    private List<Subcategory> subcategories;
+    private List<Product> products;
 
-    public Category() {
+    public Subcategory() {
     }
 
-    public Category(String description, Status status) {
+    public Subcategory(String description, Status status, Category category) {
         this.description = description;
         this.status = status;
+        this.category = category;
     }
 
-    public Category(long id, String description, Status status) {
+    public Subcategory(long id, String description, Status status, Category category) {
         this.id = id;
         this.description = description;
         this.status = status;
+        this.category = category;
     }
 
     public long getId() {
@@ -57,5 +62,13 @@ public class Category {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

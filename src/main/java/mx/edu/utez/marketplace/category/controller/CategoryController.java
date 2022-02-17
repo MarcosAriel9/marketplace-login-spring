@@ -13,25 +13,25 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/all")
-    public ResponseEntity<Message> getAll(){
+    @GetMapping("/")
+    public ResponseEntity<Message> getAll() {
         return categoryService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Message> getById(@PathVariable("id") long id){
+    public ResponseEntity<Message> getById(@PathVariable("id") long id) {
         return categoryService.findById(id);
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Message> createCategory(@RequestBody CategoryDTO categoryDTO){
-        Category category = new Category(categoryDTO.getDescription());
+    @PostMapping("/")
+    public ResponseEntity<Message> createCategory(@RequestBody CategoryDTO categoryDTO) {
+        Category category = new Category(categoryDTO.getDescription(),categoryDTO.getStatus());
         return categoryService.save(category);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Message> updateCategory(@RequestBody CategoryDTO categoryDTO){
-        Category category = new Category(categoryDTO.getId(),categoryDTO.getDescription());
+    @PutMapping("/")
+    public ResponseEntity<Message> updateCategory(@RequestBody CategoryDTO categoryDTO) {
+        Category category = new Category(categoryDTO.getId(), categoryDTO.getDescription(),categoryDTO.getStatus());
         return categoryService.update(category);
     }
 }
