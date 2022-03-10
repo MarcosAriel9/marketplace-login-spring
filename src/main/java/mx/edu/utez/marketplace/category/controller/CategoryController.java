@@ -25,13 +25,11 @@ public class CategoryController {
 
     @PostMapping("/")
     public ResponseEntity<Message> createCategory(@RequestBody CategoryDTO categoryDTO) {
-        Category category = new Category(categoryDTO.getDescription(),categoryDTO.getStatus());
-        return categoryService.save(category);
+        return categoryService.save(new Category(categoryDTO.getDescription(),categoryDTO.getStatus()));
     }
 
     @PutMapping("/")
     public ResponseEntity<Message> updateCategory(@RequestBody CategoryDTO categoryDTO) {
-        Category category = new Category(categoryDTO.getId(), categoryDTO.getDescription(),categoryDTO.getStatus());
-        return categoryService.update(category);
+        return categoryService.update(new Category(categoryDTO.getId(), categoryDTO.getDescription(),categoryDTO.getStatus()));
     }
 }
