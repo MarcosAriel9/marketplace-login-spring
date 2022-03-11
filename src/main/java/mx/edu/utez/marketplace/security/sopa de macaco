@@ -1,0 +1,31 @@
+crear usuario
+
+http://localhost:8080/api/user/
+
+{
+    "username":"mrkariel",
+    "password":"megadeth",
+    "roles":[
+        {
+            "id":1,
+            "description":"ADMIN_ROLE"
+        }
+    ],
+    "person":{
+        "name":"marcos",
+        "surname":"ordoñez",
+        "lastname":"jiménez",
+        "birthday":"2000-10-07",
+        "curp":"oojm001007hmsrmra0"
+    }
+}
+loggearse
+
+http://localhost:8080/api/auth/login/
+
+{
+    "username":"mrkariel",
+    "password":"megadeth"
+
+}
+
